@@ -24,9 +24,5 @@ public class Main {
             payment.generateReceipt();
             System.out.println("-----------------------------------");
         }
-
-
     }
-
-
 }
