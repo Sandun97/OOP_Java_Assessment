@@ -13,9 +13,20 @@ public class BankTransfer extends Payment {
     }
 
     @Override
-    public void processPayment(){
-        System.out.println("Initiating bank transfer to "+this.bankName+" using account "+this.accountNumber+" with reference "+this.referenceCode);
-        markAsCompleted();
+    public boolean validate() {
+        return this.bankName != null && !this.accountNumber.isEmpty();
+    }
+
+    @Override
+    public boolean processPayment(){
+        if (validate()) {
+            status = "CARD PAYMENT SUCCESS";
+            System.out.println("Initiating bank transfer to " + this.bankName + " using account " + this.accountNumber + " with reference " + this.referenceCode);
+            markAsCompleted();
+            return true;
+        }
+        System.out.println("Bank transfer validation failed!");
+        return false;
     }
 
 }

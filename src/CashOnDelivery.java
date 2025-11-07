@@ -8,7 +8,17 @@ public class CashOnDelivery extends Payment{
     }
 
     @Override
-    public void processPayment() {
-        System.out.println("Cash will be collected at delivery address: "+deliveryAddress);
+    public boolean validate() {
+        return amount > 0;
+    }
+
+    @Override
+    public boolean processPayment() {
+        if (validate()) {
+            System.out.println("Cash will be collected at delivery address: " + deliveryAddress);
+            return true;
+        }
+        System.out.println("COD validation failed!");
+        return false;
     }
 }

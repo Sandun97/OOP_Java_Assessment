@@ -12,13 +12,19 @@ public class CardPayment extends Payment {
     }
 
     @Override
-    public void processPayment() {
-        validateCard();
-        System.out.println("Authorizing card payment for " + cardHolderName + "...");
+    public boolean validate() {
+        return this.cardNumber != null && !this.cardHolderName.isEmpty() && !this.expiryDate.isEmpty();
     }
 
-    public void validateCard() {
-        System.out.println("Validating card number format...");
+    @Override
+    public boolean processPayment() {
+        if (validate()) {
+            System.out.println("Authorizing card payment for " + cardHolderName + "...");
+            return true;
+        }
+        System.out.println("Card validation failed!");
+        return false;
     }
+
 
 }
